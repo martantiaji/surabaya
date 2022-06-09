@@ -1,6 +1,7 @@
 pandas
 json5
 jsonschema
+geojson
 geopy
 requests
 numpy
