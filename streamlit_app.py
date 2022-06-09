@@ -7,6 +7,12 @@ import folium
 import streamlit as st
 from streamlit_folium import folium_static
 
+st.set_page_config(
+    page_title="Choropleth Map",
+    page_icon=":earth_asia:",
+    layout="wide",
+    initial_sidebar_state="auto",
+    menu_items=None)
 
 data_all = pd.read_csv('Surabaya_Full_of_Data.csv')
 data_geo = json.load(open('Kecamatan_Surabaya.geojson'))
