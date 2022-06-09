@@ -25,21 +25,21 @@ def center():
    return latitude, longitude
 
 #for changing type of the maps
-add_select = st.sidebar.selectbox("What data do you want to see?",("OpenStreetMap", "Stamen Terrain","Stamen Toner"))
+add_select = st.sidebar.selectbox("Tampilan Peta",("OpenStreetMap", "Stamen Terrain","Stamen Toner"))
 #for calling the function for getting center of maps
 centers = center()
 #showing the maps
 map_sby = folium.Map(tiles=add_select, location=[runs[0], runs[1]], zoom_start=12)
 #design for the app
-st.title('Map of Surabaya')
+st.title('Peta Tematik Kepadatan Penduduk Kota Surabaya')
 folium_static(map_sby)
 
-dicts = {"Total_Pop":'Total Population',
-         "Male_Pop": 'Male Population',
-         "Female_Pop": 'Female Population',
+dicts = {"Kepadatan 2021":'Kepadatan 2021',
+         "Kepadatan 2020": 'Kepadatan 2020',
+         "Kepadatan 2019": 'Kepadatan 2019',
          "Area_Region": 'Areas Region(km squared)'}
-select_data = st.sidebar.radio("What data do you want to see?"
-("Total_Pop", "Area_Region","Male_Pop",'Female_Pop'))
+select_data = st.sidebar.radio("Informasi Data"
+("Kepadatan 2021", "Area_Region","Kepadatan 2020",'Kepadatan 2019'))
 
 def threshold(data):
    threshold_scale = np.linspace(data_all[dicts[data]].min(),
@@ -65,9 +65,9 @@ def show_maps(data, threshold_scale):
 show_maps(select_data, threshold(select_data))
 
 for idx in range(31):
-    data_geo['features'][idx]['properties']['Total_Pop']= int(data_all['Total Population'][idx])
-    data_geo['features'][idx]['properties']['Male_Pop'] = int(data_all['Male Population'][idx])
-    data_geo['features'][idx]['properties']['Female_Pop'] = int(data_all['Female Population'][idx])
+    data_geo['features'][idx]['properties']['Kepadatan 2021']= int(data_all['Kepadatan 2021'][idx])
+    data_geo['features'][idx]['properties']['Kepadatan 2020'] = int(data_all['Kepadatan 2020'][idx])
+    data_geo['features'][idx]['properties']['Kepadatan 2019'] = int(data_all['Kepadatan 2019'][idx])
     data_geo['features'][idx]['properties']['Area_Region'] = float(data_all['Areas Region(km squared)'][idx])
 
 def show_maps(data, threshold_scale):
